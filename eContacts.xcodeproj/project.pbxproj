@@ -13,6 +13,9 @@
 		CCFF195719E4230E00AB2163 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCFF195619E4230E00AB2163 /* Images.xcassets */; };
 		CCFF195A19E4230E00AB2163 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCFF195819E4230E00AB2163 /* LaunchScreen.xib */; };
 		CCFF196619E4230E00AB2163 /* eContactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFF196519E4230E00AB2163 /* eContactsTests.swift */; };
+		CCFF197019E42A3500AB2163 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFF196F19E42A3500AB2163 /* Contacts.swift */; };
+		CCFF197219E42BEC00AB2163 /* ContactDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFF197119E42BEC00AB2163 /* ContactDetails.swift */; };
+		CCFF197419E42D6400AB2163 /* ContactInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFF197319E42D6400AB2163 /* ContactInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		CCFF195F19E4230E00AB2163 /* eContactsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = eContactsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCFF196419E4230E00AB2163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCFF196519E4230E00AB2163 /* eContactsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eContactsTests.swift; sourceTree = "<group>"; };
+		CCFF196F19E42A3500AB2163 /* Contacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
+		CCFF197119E42BEC00AB2163 /* ContactDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetails.swift; sourceTree = "<group>"; };
+		CCFF197319E42D6400AB2163 /* ContactInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +85,9 @@
 			children = (
 				CCFF194F19E4230E00AB2163 /* AppDelegate.swift */,
 				CCFF195119E4230E00AB2163 /* ViewController.swift */,
+				CCFF196F19E42A3500AB2163 /* Contacts.swift */,
+				CCFF197319E42D6400AB2163 /* ContactInput.swift */,
+				CCFF197119E42BEC00AB2163 /* ContactDetails.swift */,
 				CCFF195319E4230E00AB2163 /* Main.storyboard */,
 				CCFF195619E4230E00AB2163 /* Images.xcassets */,
 				CCFF195819E4230E00AB2163 /* LaunchScreen.xib */,
@@ -213,7 +222,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCFF195219E4230E00AB2163 /* ViewController.swift in Sources */,
+				CCFF197219E42BEC00AB2163 /* ContactDetails.swift in Sources */,
+				CCFF197419E42D6400AB2163 /* ContactInput.swift in Sources */,
 				CCFF195019E4230E00AB2163 /* AppDelegate.swift in Sources */,
+				CCFF197019E42A3500AB2163 /* Contacts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

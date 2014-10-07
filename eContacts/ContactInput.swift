@@ -8,12 +8,27 @@
 
 import UIKit
 
-class ContactInput: UIViewController {
+protocol didUpdateContact {
+    func dataUpdated(sender: AnyObject, aName: String, aPhoneNumber: String)
+}
 
+class ContactInput: UIViewController, UITextFieldDelegate   {
+
+    //Properties
+    var nameFromInput = ""
+    var phoneFromInput = ""
+    var delegateFromInput: didUpdateContact?
+    
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var phoneField: UITextField!
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.nameField.delegate = self
+        self.phoneField.delegate = self 
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +36,26 @@ class ContactInput: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        if textField.tag == 1 {
+            self.nameFromInput = nameField.text
+        }
+        else if textField.tag == 2 {
+            self.phoneFromInput = phoneField.text
+        }
+        
+        textField.resignFirstResponder()
+        return true
     }
-    */
+   
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if nameFromInput != "" && phoneFromInput != "" {
+            self.delegateFromInput!.dataUpdated(self, aName: nameFromInput, aPhoneNumber: phoneFromInput)
+        }
+    }
+    
 
 }

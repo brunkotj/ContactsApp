@@ -8,90 +8,94 @@
 
 import UIKit
 
-class Contacts: UITableViewController {
+class Contacts: UITableViewController, didUpdateContact  {
 
+    struct ContactInfo {
+        var name: String
+        var phoneNumber: String
+    }
+    
+    var listOfContacts: [ContactInfo] = []
+    
+    // Sample Contacts 
+    var firstContact = ContactInfo(name: "Paul Graham", phoneNumber: "(952) 929-6081)")
+    var secondContact = ContactInfo(name: "Mark Suster", phoneNumber: "(612) 927-7079")
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Do any additional setup after loading the view, typically from a nib. 
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
+        listOfContacts.append(firstContact)
+        listOfContacts.append(secondContact)
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 0
-    }
 
     override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
+       
+        return listOfContacts.count
     }
-
-    /*
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
-
-        // Configure the cell...
-
+    
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("contact", forIndexPath: indexPath) as UITableViewCell
+        
+        cell.textLabel!.text = listOfContacts[indexPath.row].name
+        cell.detailTextLabel!.text = listOfContacts[indexPath.row].phoneNumber
+        
         return cell
     }
-    */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ToDetail" {
+         
+            let indexPath = self.tableView.indexPathForSelectedRow()
+            let theSelected = listOfContacts[indexPath!.row]
+            let theDestination = (segue.destinationViewController as ContactDetails)
+            
+            theDestination.nameDetail = theSelected.name
+            theDestination.phoneDetail = theSelected.phoneNumber    
+            
+        }
+        
+        if segue.identifier == "ToInput"    {
+            (segue.destinationViewController as ContactInput).delegateFromInput = self
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+    
+    
+    func dataUpdated(sender: AnyObject, aName: String, aPhoneNumber: String) {
+        
+        var newContact = ContactInfo(name: aName, phoneNumber: aPhoneNumber)
+        listOfContacts.append(newContact)
+        
+        self.tableView.reloadData()
+        
+    }
+    
+   override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    
         if editingStyle == .Delete {
-            // Delete the row from the data source
+            listOfContacts.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView!, moveRowAtIndexPath fromIndexPath: NSIndexPath!, toIndexPath: NSIndexPath!) {
-
+    
+    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        
+            let fromContact = listOfContacts[sourceIndexPath.row]
+            listOfContacts.removeAtIndex(sourceIndexPath.row)
+            listOfContacts.insert(fromContact, atIndex: destinationIndexPath.row)
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView!, canMoveRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
